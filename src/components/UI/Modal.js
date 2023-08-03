@@ -6,7 +6,7 @@ import classes from "./Modal.module.css";
 // zwei Komponenten sind hier zusätzlich. sie könnten auch standartmäig in seperate Dateien. Bei diesem Unfang bieten es sich jedoch an es so zu handhaben.
 
 const Backdrop = (props) => {
-  return <div className={classes.backdrop} />;
+  return <div className={classes.backdrop} onClick={props.onClose} />;
 };
 
 //gutes Template für ein overlay mithilfe props.children
@@ -27,7 +27,10 @@ const portalElement = document.getElementById("overlays"); // in der HTML wurde 
 export default function Modal(props) {
   return (
     <Fragment>
-      {ReactDOM.createPortal(<Backdrop />, portalElement)}
+      {ReactDOM.createPortal(
+        <Backdrop onClose={props.onClose} />,
+        portalElement
+      )}
       {ReactDOM.createPortal(
         <ModalOverlay>{props.children}</ModalOverlay>,
         portalElement
