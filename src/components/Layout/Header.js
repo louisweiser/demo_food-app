@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 
+import HeaderCartButton from "./HeaderCartButton";
 import mealsImage from "../../assets/meals.jpg"; // Bilder können einfach importiert werden
 import classes from "./Header.module.css"; // Styles können alle zusammen importuert werden
 
@@ -8,6 +9,7 @@ export default function Header(props) {
     <Fragment>
       <header className={classes.header}>
         <h1>Meals</h1>
+        <HeaderCartButton />
       </header>
       <div className={classes["main-image"]}>
         {" "}
