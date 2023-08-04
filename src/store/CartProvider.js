@@ -7,6 +7,7 @@ const defaultCartState = {
   totalAmount: 0,
 };
 
+// reducer function is outside because cartReducer needs nothing from CartProvider
 const cartReducer = (state, action) => {
   if (action.type === "ADD") {
     const updatedItems = state.items.concat(action.item);
@@ -21,9 +22,10 @@ const cartReducer = (state, action) => {
 };
 
 // die componente ( provider ) ist dazu da, die context data zu managen und die daten zur verfügung zu stellen
-// der Povider ist in einer extra componente um damit die App.js sauberer bleibt
+// der Povider ist in einer extra componente, es kann aber auch zusammen in einer datei gesetzt sein
 
 export default function CartProvider(props) {
+  //reducer call
   const [cartState, dispatchCartAction] = useReducer(
     cartReducer,
     defaultCartState
