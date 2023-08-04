@@ -1,6 +1,7 @@
 import { useContext } from "react";
 
 import Modal from "../UI/Modal";
+import CartItem from "./CartItem";
 import classes from "./Cart.module.css";
 import CartContext from "../../store/cart-context";
 
@@ -14,6 +15,7 @@ export default function Cart(props) {
 
   const cartItemAddHandler = (item) => {};
 
+  //bind() preconfigure the arguments
   const cartItems = (
     <ul className={classes["cart-items"]}>
       {cartCtx.items.map((item) => (
