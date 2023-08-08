@@ -8,10 +8,17 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 export default function AvailableMeals() {
   const [meals, setMeals] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [httpError, setHttpError] = useState();
 
   useEffect(() => {
-    async function fetchApi() {
+    async function fetchMeals() {
       const response = await fetch(apiUrl);
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
       const data = await response.json();
 
       const loadedMeals = [];
@@ -26,9 +33,29 @@ export default function AvailableMeals() {
       }
 
       setMeals(loadedMeals);
+      setIsLoading(false);
     }
-    fetchApi();
+    fetchMeals().catch((error) => {
+      setIsLoading(false);
+      setHttpError(error.message);
+    });
   }, []);
+
+  if (isLoading) {
+    return (
+      <section className={classes.MealsLoading}>
+        <p>Loading...</p>
+      </section>
+    );
+  }
+
+  if (httpError) {
+    return (
+      <section className={classes.MealsError}>
+        <p>{httpError}</p>
+      </section>
+    );
+  }
 
   const mealsList = meals.map((meal) => (
     <MealItem
