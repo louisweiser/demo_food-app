@@ -1,6 +1,6 @@
 import classes from "./Checkout.module.css";
 
-export default function CheckOut(props) {
+export default function Checkout(props) {
   const confirmHandler = (event) => {
     event.preventDefault();
   };
